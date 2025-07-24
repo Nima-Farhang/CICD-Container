@@ -1,40 +1,38 @@
 
----
+## ✅ Project Backlog (with Terraform)
 
-## ✅ Project Backlog (Work Items)
+### 🔧 Infrastructure Setup (with Terraform)
+- [ ] Write Terraform `main.tf`, `variables.tf`, `outputs.tf`
+- [ ] Provision ECR repository via Terraform
+- [ ] Provision ECS Cluster via Terraform
+- [ ] Create ECS Task Definition via Terraform
+- [ ] Create ECS Fargate Service via Terraform
+- [ ] Create IAM Role for ECS task execution via Terraform
+- [ ] Output necessary variables (ECR URL, ECS cluster/service names)
 
-### 🔧 Infrastructure & AWS Setup
-- [ ] Create an ECR repository
-- [ ] Create an ECS Cluster with Fargate launch type
-- [ ] Define ECS Task Definition with CPU/memory/container settings
-- [ ] Set up ECS Service linked to the task definition
-- [ ] Configure IAM roles for GitHub Actions to access ECS and ECR
+### 💻 Application Containerization
+- [ ] Containerize the app with Docker
+- [ ] Create a proper `.dockerignore` file
+- [ ] Write a production-grade `Dockerfile`
+- [ ] Test the container locally
 
-### 💻 Local App Setup
-- [ ] Containerize the application with Docker
-- [ ] Create `.dockerignore`
-- [ ] Add a `Dockerfile` with multistage build (if needed)
-- [ ] Create a sample `ecs/task-definition.json`
+### 🧪 CI/CD Pipeline (GitHub Actions)
+- [ ] Create `.github/workflows/deploy.yml` pipeline
+  - [ ] Step 1: Checkout repo
+  - [ ] Step 2: Lint Dockerfile using Hadolint
+  - [ ] Step 3: Scan image using Trivy
+  - [ ] Step 4: Build & push image to ECR
+  - [ ] Step 5: Register new ECS Task Definition
+  - [ ] Step 6: Update ECS Service with new task
 
-### 🧪 CI/CD Pipeline Setup
-- [ ] Write GitHub Actions workflow `.github/workflows/deploy.yml`
-  - [ ] Step 1: Checkout code
-  - [ ] Step 2: Lint Dockerfile with Hadolint
-  - [ ] Step 3: Scan image with Trivy
-  - [ ] Step 4: Log in to AWS ECR
-  - [ ] Step 5: Build & push Docker image
-  - [ ] Step 6: Register new ECS task definition
-  - [ ] Step 7: Deploy new task in ECS service
-- [ ] Add GitHub secrets to your repo
+### 🔐 GitHub Secrets & Environment
+- [ ] Add AWS credentials to GitHub Secrets
+- [ ] Add environment variables (ECS, ECR names)
+- [ ] Reference Terraform outputs for automation
 
-### 🛡️ Optional (Security & Monitoring)
-- [ ] Add Slack/email notification on failure
-- [ ] Add Prometheus/Grafana monitoring for deployed service
-- [ ] Set up CloudWatch alarms
+### 📈 Monitoring & Future Enhancements
+- [ ] Add logging & metrics integration (e.g. CloudWatch, Prometheus)
+- [ ] Add rollback capability in CI/CD
+- [ ] Add Slack/email alerts for failures
+- [ ] Automate Terraform apply via GitHub Actions (optional)
 
-### 🚀 Final Steps
-- [ ] Test deployment with a sample commit
-- [ ] Validate rollback in case of failure
-- [ ] Document usage instructions in `README.md`
-
----

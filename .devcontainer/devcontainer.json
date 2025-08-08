@@ -14,5 +14,8 @@
             "settings": {}
         }
     },
-    "postCreateCommand": "pip install -r app/requirements.txt"
+    "postCreateCommand": "pip install -r app/requirements.txt",
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    ]
 }

@@ -1,23 +1,14 @@
-# configure AWS CLI
 
-aws configure sso
+# docker 
 
+docker build -t my-flask-app ./app
 
-. SSO session name (Recommended): Terraform
-. SSO start URL [None]: https://d-9067e9a26d.awsapps.com/start
-. SSO region [None]: us-east-1
-. SSO registration scopes [None]: sso:account:access
-
-
-Using the role name "AdministratorAccess"
-. CLI default client Region [ap-southeast-2]: ap-southeast-2
-. CLI default output format [json]: json
-. CLI profile name [AdministratorAccess-767397659305]: Nima
+docker run -p 8080:80 my-flask-app
 
 
 # login to AWS
 
- aws sso login --profile Nima
+aws sso login --profile Nima
 
 
 

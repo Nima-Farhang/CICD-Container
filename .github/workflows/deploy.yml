@@ -8,19 +8,9 @@ jobs:
   push-to-prod:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-
-      - name: Configure Git
+      - name: test source
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-
-      - name: Push to prod branch
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git fetch origin prod || true
-          git checkout -B prod
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} prod --force
+          ls -la
+          pwd
+          hostname
 

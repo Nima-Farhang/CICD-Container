@@ -1,46 +1,31 @@
-
-name: Deploy to AWS ECS
+name: Push to prod branch on master changes
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
-  deploy:
+  push-to-prod:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v2.0.0
-        with:
-          dockerfile: ./app/Dockerfile
-
-      - name: Scan image for vulnerabilities
-        uses: aquasecurity/trivy-action@v0.11.2
-        with:
-          image-ref: ${{ env.ECR_REPOSITORY }}:latest
-          format: table
-          exit-code: 1
-          ignore-unfixed: true
-
-      - name: Log in to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Build and push Docker image
+      - name: Configure Git
         run: |
-          docker build -t $ECR_REPOSITORY:latest ./app
-          docker tag $ECR_REPOSITORY:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
 
-      - name: Deploy to ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-        with:
-          task-definition: ecs/task-definition.json
-          service: ${{ secrets.ECS_SERVICE_NAME }}
-          cluster: ${{ secrets.ECS_CLUSTER_NAME }}
-          wait-for-service-stability: true
+      - name: Push to prod branch
+        run: |
+          git fetch origin prod || true
+          git checkout -B prod
+          git push origin prod --force
+      
+      - name: stuff
+        run: |
+          echo "This is a placeholder for additional steps."
+          hostname
+          pwd
+          ls -la
+

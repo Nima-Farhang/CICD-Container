@@ -12,7 +12,7 @@ terraform {
 
 provider "aws" {
   region                   = "ap-southeast-2"
-  shared_config_files      = ["C:\\Users\\nima.farhang\\.aws\\config"]
-  shared_credentials_files = ["C:\\Users\\nima.farhang\\.aws\\credentials"]
+  shared_config_files      = ["/home/vscode/.aws/config"]
+  shared_credentials_files = ["/home/vscode/.aws/credentials"]
   profile                  = "Nima"
 }

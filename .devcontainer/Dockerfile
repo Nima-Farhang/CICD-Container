@@ -27,10 +27,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy AWS CLI SSO configuration script (to be run at container start, not build)
 COPY .devcontainer/aws-configure.sh /usr/local/bin/aws-configure.sh
 RUN chmod +x /usr/local/bin/aws-configure.sh
-RUN ./usr/local/bin/aws-configure.sh
 
 # Add alias for root directory
 RUN echo "alias root='cd /workspaces/CICD-Container'" >> /etc/bash.bashrc
 
-# Set the default shell to bash
-CMD ["bash"]
+# Set the default shell to run the AWS config script, then start bash
+CMD ["/bin/bash", "-c", "/usr/local/bin/aws-configure.sh && exec bash"]
+# ...existing code...

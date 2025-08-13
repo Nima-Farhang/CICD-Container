@@ -2,7 +2,7 @@
 ## ✅ Project Backlog (with Terraform)
 
 ### 🔧 Infrastructure Setup (with Terraform)
-- [ ] Write Terraform `main.tf`, `variables.tf`, `outputs.tf`
+- [*] Write Terraform `main.tf`, `variables.tf`, `outputs.tf`
 - [ ] Provision ECR repository via Terraform
 - [ ] Provision ECS Cluster via Terraform
 - [ ] Create ECS Task Definition via Terraform

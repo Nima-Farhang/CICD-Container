@@ -1,37 +1,26 @@
 #!/bin/bash
 set -e
 
-ENV_FILE="../.env"
+ENV_FILE="/workspaces/CICD-Container/.env"
 
-get_env_var() {
-  grep "^$1=" "$ENV_FILE" | cut -d '=' -f2- | tr -d '"\r\n '
+get_export_env_var() {
+  
+  local var_name="$1"
+  local value
+  value=$(grep "^$var_name=" "$ENV_FILE" | cut -d '=' -f2- | tr -d '"\r\n ')
+  export "$var_name=$value"
+  echo "$value"  # Return the value
 }
 
-AWS_ACCESS_KEY_ID=$(get_env_var AWS_ACCESS_KEY_ID)
-export AWS_ACCESS_KEY_ID
-echo "AWS_ACCESS_KEY_ID exported: $AWS_ACCESS_KEY_ID"
+AWS_ACCESS_KEY_ID=$(get_export_env_var AWS_ACCESS_KEY_ID)
+AWS_SECRET_ACCESS_KEY=$(get_export_env_var AWS_SECRET_ACCESS_KEY)
+AWS_SESSION_TOKEN=$(get_export_env_var AWS_SESSION_TOKEN)
+SSO_START_URL=$(get_export_env_var SSO_START_URL)
+SSO_ACCOUNT_ID=$(get_export_env_var SSO_ACCOUNT_ID)
+PROFILE_NAME=$(get_export_env_var PROFILE_NAME)
 
-AWS_SECRET_ACCESS_KEY=$(get_env_var AWS_SECRET_ACCESS_KEY)
-export AWS_SECRET_ACCESS_KEY
-echo "AWS_SECRET_ACCESS_KEY exported: $AWS_SECRET_ACCESS_KEY"
 
-AWS_SESSION_TOKEN=$(get_env_var AWS_SESSION_TOKEN)
-export AWS_SESSION_TOKEN
-echo "AWS_SESSION_TOKEN exported: $AWS_SESSION_TOKEN"
 
-SSO_START_URL=$(get_env_var SSO_START_URL)
-export SSO_START_URL
-echo "SSO_START_URL exported: $SSO_START_URL"
-
-SSO_ACCOUNT_ID=$(get_env_var SSO_ACCOUNT_ID)
-export SSO_ACCOUNT_ID
-echo "SSO_ACCOUNT_ID exported: $SSO_ACCOUNT_ID"
-
-PROFILE_NAME=$(get_env_var PROFILE_NAME)
-export PROFILE_NAME
-echo "PROFILE_NAME exported: $PROFILE_NAME"
-
-echo "DEBUG: SSO_ACCOUNT_ID='$SSO_ACCOUNT_ID'"
 
 AWS_CREDENTIALS_FILE="${HOME}/.aws/credentials"
 mkdir -p "$(dirname "$AWS_CREDENTIALS_FILE")"
@@ -44,6 +33,8 @@ aws_session_token=${AWS_SESSION_TOKEN}
 EOF
 
 echo "AWS CLI credentials for account '${SSO_ACCOUNT_ID}' configured at ${AWS_CREDENTIALS_FILE}."
+cat $AWS_CREDENTIALS_FILE
+
 
 AWS_CONFIG_FILE="${HOME}/.aws/config"
 mkdir -p "$(dirname "$AWS_CONFIG_FILE")"
@@ -63,3 +54,5 @@ sso_registration_scopes = sso:account:access
 EOF
 
 echo "AWS CLI SSO profile '${PROFILE_NAME}' and session 'Terraform' configured at ${AWS_CONFIG_FILE}."
+
+cat $AWS_CONFIG_FILE

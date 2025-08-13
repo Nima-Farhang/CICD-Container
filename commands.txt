@@ -1,22 +1,7 @@
 
-# docker 
-
-docker build -t my-flask-app ./app
-
-docker run -p 8080:80 my-flask-app
-
-
 # login to AWS
 
 aws sso login --profile Nima
-
-
-
-# Configure HCP
-
-terraform login
-
-folder : C:\Users\nima.farhang\AppData\Roaming\terraform.d\credentials.tfrc.json
 
 
 // terraform folder
@@ -37,3 +22,6 @@ terraform show
 terraform state list
 
 terraform destroy
+
+
+terraform apply -var-file="prod.tfvars" -var="instance_type=m5.large"

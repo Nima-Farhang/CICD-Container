@@ -11,3 +11,12 @@ output "ecr_bucket_url" {
 output "ecr_repository_url" {
   value = aws_ecr_repository.ecr_repo.repository_url
 }
+
+
+output "ecs_cluster_name" {
+  value = aws_ecs_cluster.main.name
+}
+
+output "ecs_cluster_arn" {
+  value = aws_ecs_cluster.main.arn
+}

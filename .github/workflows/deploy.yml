@@ -19,8 +19,8 @@ jobs:
           pwd
           hostname
 
-      # # Step 3: Run your shell script from the repo
-      # - name: Run shell script
-      #   run: |
-      #     chmod +x ./scripts/myscript.sh
-      #     ./scripts/myscript.sh
+      # Step 3: Run your shell script from the repo
+      - name: Run shell script
+        run: |
+          chmod +x ./.devcontainer/aws-configure.sh
+          source ./.devcontainer/aws-configure.sh

@@ -8,9 +8,19 @@ jobs:
   push-to-prod:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Checkout your repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Test source
       - name: test source
         run: |
           ls -la
           pwd
           hostname
 
+      # Step 3: Run your shell script from the repo
+      - name: Run shell script
+        run: |
+          chmod +x ./.devcontainer/aws-configure.sh
+          source ./.devcontainer/aws-configure.sh

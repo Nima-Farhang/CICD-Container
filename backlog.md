@@ -4,7 +4,7 @@
 ### 🔧 Infrastructure Setup (with Terraform)
 - [x] Write Terraform `main.tf`, `variables.tf`, `outputs.tf`
 - [x] Provision ECR repository via Terraform
-- [ ] Provision ECS Cluster via Terraform
+- [x] Provision ECS Cluster via Terraform
 - [ ] Create ECS Task Definition via Terraform
 - [ ] Create ECS Fargate Service via Terraform
 - [ ] Create IAM Role for ECS task execution via Terraform

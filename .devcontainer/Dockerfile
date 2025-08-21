@@ -32,5 +32,5 @@ RUN chmod +x /usr/local/bin/aws-configure.sh
 RUN echo "alias root='cd /workspaces/CICD-Container'" >> /etc/bash.bashrc
 
 # Set the default shell to run the AWS config script, then start bash
-CMD ["/bin/bash", "-c", "/usr/local/bin/aws-configure.sh && exec bash"]
+CMD ["/bin/bash", "-c", "source usr/local/bin/aws-configure.sh && exec bash"]
 # ...existing code...

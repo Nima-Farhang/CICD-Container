@@ -3,25 +3,6 @@ set -e
 
 ENV_FILE="/workspaces/CICD-Container/.env"
 
-get_export_env_var() {
-  
-  local var_name="$1"
-  local value
-  value=$(grep "^$var_name=" "$ENV_FILE" | cut -d '=' -f2- | tr -d '"\r\n ')
-  export "$var_name=$value"
-  echo "$value"  # Return the value
-}
-
-AWS_ACCESS_KEY_ID=$(get_export_env_var AWS_ACCESS_KEY_ID)
-AWS_SECRET_ACCESS_KEY=$(get_export_env_var AWS_SECRET_ACCESS_KEY)
-AWS_SESSION_TOKEN=$(get_export_env_var AWS_SESSION_TOKEN)
-SSO_START_URL=$(get_export_env_var SSO_START_URL)
-SSO_ACCOUNT_ID=$(get_export_env_var SSO_ACCOUNT_ID)
-PROFILE_NAME=$(get_export_env_var PROFILE_NAME)
-
-
-
-
 AWS_CREDENTIALS_FILE="${HOME}/.aws/credentials"
 mkdir -p "$(dirname "$AWS_CREDENTIALS_FILE")"
 

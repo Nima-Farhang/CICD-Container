@@ -18,9 +18,6 @@ resource "aws_ecs_cluster_capacity_providers" "main" {
   }
 }
 
-
-
-
 ############################################
 # CloudWatch Logs (so logs don't 404)
 ############################################
@@ -28,8 +25,6 @@ resource "aws_cloudwatch_log_group" "ecs" {
   name              = "/ecs/main-app-${var.environment}"
   retention_in_days = 14
 }
-
-
 
 ############################################
 # ECS Task Definition (Fargate)
@@ -94,4 +89,3 @@ resource "aws_ecs_task_definition" "main_app" {
 
   depends_on = [aws_cloudwatch_log_group.ecs]
 }
-

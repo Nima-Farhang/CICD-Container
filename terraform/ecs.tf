@@ -1,4 +1,4 @@
-resource "aws_ecs_cluster" "main" {
+resource "aws_ecs_cluster" "ecs" {
   name = "ecs-cluster-${var.environment}-${var.account_id}"
 
   tags = {
@@ -7,8 +7,8 @@ resource "aws_ecs_cluster" "main" {
   }
 }
 
-resource "aws_ecs_cluster_capacity_providers" "main" {
-  cluster_name       = aws_ecs_cluster.main.name
+resource "aws_ecs_cluster_capacity_providers" "ecs" {
+  cluster_name       = aws_ecs_cluster.ecs.name
   capacity_providers = ["FARGATE", "FARGATE_SPOT"]
 
   default_capacity_provider_strategy {
@@ -22,15 +22,15 @@ resource "aws_ecs_cluster_capacity_providers" "main" {
 # CloudWatch Logs (so logs don't 404)
 ############################################
 resource "aws_cloudwatch_log_group" "ecs" {
-  name              = "/ecs/main-app-${var.environment}"
+  name              = "/ecs/ecs-app-${var.environment}"
   retention_in_days = 14
 }
 
 ############################################
 # ECS Task Definition (Fargate)
 ############################################
-resource "aws_ecs_task_definition" "main_app" {
-  family                   = "main-app-${var.environment}"
+resource "aws_ecs_task_definition" "ecs_app" {
+  family                   = "ecs-app-${var.environment}"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.task_cpu
@@ -50,8 +50,8 @@ resource "aws_ecs_task_definition" "main_app" {
 
   container_definitions = jsonencode([
     {
-      name      = "main-app"
-      image     = var.image_uri
+      name      = "ecs-app"
+      image     = var.main_app_image_uri
       essential = true
 
       portMappings = [

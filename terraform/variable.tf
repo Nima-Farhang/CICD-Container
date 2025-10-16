@@ -28,7 +28,10 @@ variable "task_memory" {
   default = "512"
 } # match valid Fargate memory for chosen CPU
 
-variable "image_uri" { type = string } # e.g., "<account>.dkr.ecr.<region>.amazonaws.com/my-app:latest"
+variable "main_app_image_uri" { 
+  type = string
+  default = "767397659305.dkr.ecr.ap-southeast-2.amazonaws.com/ecr-repo-dev-767397659305:latest"
+ } # e.g., "<account>.dkr.ecr.<region>.amazonaws.com/my-app:latest"
 
 variable "container_port" {
   type    = number

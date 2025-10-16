@@ -2,11 +2,11 @@
 {
   "family": "your-task-family",
   "networkMode": "awsvpc",
-  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::767397659305:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
-      "name": "your-container-name",
-      "image": "YOUR_ECR_IMAGE_URL",
+      "name": "main-app",
+      "image": "767397659305.dkr.ecr.ap-southeast-2.amazonaws.com/ecr-repo-dev-767397659305:latest",
       "essential": true,
       "portMappings": [
         {

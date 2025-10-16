@@ -5,10 +5,10 @@
 - [x] Write Terraform `main.tf`, `variables.tf`, `outputs.tf`
 - [x] Provision ECR repository via Terraform
 - [x] Provision ECS Cluster via Terraform
-- [ ] Create ECS Task Definition via Terraform
-- [ ] Create ECS Fargate Service via Terraform
-- [ ] Create IAM Role for ECS task execution via Terraform
-- [ ] Output necessary variables (ECR URL, ECS cluster/service names)
+- [x] Create ECS Task Definition via Terraform
+- [x] Create ECS Fargate Service via Terraform
+- [x] Create IAM Role for ECS task execution via Terraform
+- [x] Output necessary variables (ECR URL, ECS cluster/service names)
 
 ### 💻 Application Containerization
 - [ ] Containerize the app with Docker

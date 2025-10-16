@@ -1,8 +1,8 @@
 {
     "name": "CICD Dev Container",
     "build": {
-        "dockerfile": "Dockerfile",
-        "context": ".."
+        "context": "..",
+        "dockerfile": "Dockerfile"
     },
     "customizations": {
         "vscode": {
@@ -10,7 +10,8 @@
                 "ms-python.python",
                 "ms-azuretools.vscode-docker",
                 "ms-vscode-remote.remote-containers",
-                "hashicorp.terraform"
+                "hashicorp.terraform",
+                "esbenp.prettier-vscode"
             ],
             "settings": {}
         }
